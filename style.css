@@ -1,0 +1,263 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+}
+
+
+
+.homepage{
+  background-color: rgb(12, 12, 12);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  transition: all .4s ease-in-out;
+  /*visibility: hidden;*/
+  z-index: 2;
+}
+
+.logo{
+  display: flex;
+ 
+}
+.logo h1{
+  font-size: 38px;
+  text-transform: uppercase;
+  color: white;
+  font-family: 'Black Ops One', cursive;
+ 
+}
+
+
+
+span{
+  color: red;
+}
+
+.loadbars{
+  display: flex;
+  width: 100%;
+  height: 5vh;
+  
+  align-items: center;
+  justify-content: center;
+}
+
+.loadOne{
+  border: 4px solid white;
+  border-top: 4px solid red;
+  animation: spin 2s linear infinite;
+  animation-delay: 1.3s;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 50%;
+  opacity: 0;
+}
+
+
+
+
+@keyframes spin {
+0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
+}
+
+
+@keyframes write {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.one{
+  opacity: 0;
+  animation-name: write;
+  animation-duration: 1s;
+  animation-delay: .2s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in;
+  
+}
+
+.two{
+  opacity: 0;
+  animation-name: write;
+  animation-duration: 1s;
+  animation-delay: .4s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in;
+  
+}
+
+.three{
+  opacity: 0;
+  animation-name: write;
+  animation-duration: 1s;
+  animation-delay: .6s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in;
+  
+}
+
+.four{
+  opacity: 0;
+  animation-name: write;
+  animation-duration: 1s;
+  animation-delay: .8s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in;
+  
+}
+
+.five{
+  opacity: 0;
+  animation-name: write;
+  animation-duration: 1s;
+  animation-delay: 1s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in;
+  
+}
+
+.six{
+  opacity: 0;
+  animation-name: write;
+  animation-duration: 1s;
+  animation-delay: 1.2s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in;
+  
+}
+.login{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.login-signup{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  background-color: rgb(19, 19, 19);
+  z-index: 1;
+}
+.login-signup .logo{
+ display: flex;
+ justify-content: center;
+
+}
+.login-signup .logo h1{
+font-size: 22px;
+margin-top: 1.5em;
+padding: .3em;
+border-radius: .3em;
+}
+
+.login h3{
+  text-transform: uppercase;
+  text-align: center;
+  font-family: 'Inclusive Sans', sans-serif;
+  color: beige;
+}
+
+.login-head{
+  margin-top: 2em;
+}
+.login-head p{
+  text-align: center;
+  font-family: 'Inclusive Sans', sans-serif;
+  text-transform: capitalize;
+  color: beige;
+  font-size: 14px;
+  margin-top: .2em;
+}
+
+.form{
+  margin-top: 1.5em;
+  display: flex;
+  flex-direction: column;
+  padding-left: 1em;
+  padding-right: 1em;
+  max-width: 500px;
+ 
+}
+
+.form label{
+  text-transform: capitalize;
+  color: beige;
+  font-family: 'Inclusive Sans', sans-serif;
+font-size: 14px;
+}
+.form input{
+  margin-bottom: 1.5em;
+  height: 3em;
+  border-radius: .2em;
+  outline: none;
+  border: none;
+  font-weight: bold;
+  color: rgb(65, 65, 65);
+  padding-left: .2em;
+}
+
+.form button{
+  height: 3em;
+  text-transform: capitalize;
+  color: beige;
+  font-family: 'Inclusive Sans', sans-serif;
+  background-color: red;
+  border-radius: .2em;
+  border: none;
+  cursor: pointer;
+}
+
+.form input::placeholder{
+  text-transform: capitalize;
+  font-weight: bold;
+  padding-left: .2em;
+}
+
+.forgot-password{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.forgot-password a{
+  text-decoration: none;
+  text-transform: capitalize;
+  color: rgb(184, 184, 184);
+  font-size: 12px;
+  font-family: 'Inclusive Sans', sans-serif;
+}
+.form p{
+  margin-top: .5em;
+  text-transform: capitalize;
+  font-size: 13px;
+  font-family: 'Inclusive Sans', sans-serif;
+  color: beige;
+  text-align: center; 
+}
+
+.create{
+  display: flex;
+  gap: .2em;
+}
+
+.create a{
+  font-family: 'Inclusive Sans', sans-serif;
+  color: rgb(184, 184, 184);
+  text-transform: capitalize;
+  font-size: 13px;
+  margin-top: .5em;
+  text-decoration: none;
+}
