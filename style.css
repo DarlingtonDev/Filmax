@@ -139,6 +139,23 @@ span{
   display: flex;
   flex-direction: column;
   align-items: center;
+  flex: 1 0 100%;
+}
+
+.login-signup-flex{
+  display: flex;
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+
+.login1{
+  transition: all .4s ease-in-out;
+ transform: translateX(0%);
+}
+
+.login2{
+  transition: all .4s ease-in-out;
+  transform: translateX(0%);
 }
 .login-signup{
   display: flex;
@@ -167,7 +184,8 @@ border-radius: .3em;
   text-transform: uppercase;
   text-align: center;
   font-family: 'Inclusive Sans', sans-serif;
-  color: beige;
+  color: rgb(184, 184, 184);
+  font-size: 16px;
 }
 
 .login-head{
@@ -177,7 +195,7 @@ border-radius: .3em;
   text-align: center;
   font-family: 'Inclusive Sans', sans-serif;
   text-transform: capitalize;
-  color: beige;
+  color: rgb(184, 184, 184);
   font-size: 14px;
   margin-top: .2em;
 }
@@ -186,8 +204,10 @@ border-radius: .3em;
   margin-top: 1.5em;
   display: flex;
   flex-direction: column;
-  padding-left: 1em;
-  padding-right: 1em;
+  padding-left: 2em;
+  padding-right: 2em;
+  width: 100%;
+  justify-content: center;
   max-width: 500px;
  
 }
@@ -251,6 +271,7 @@ font-size: 14px;
 .create{
   display: flex;
   gap: .2em;
+  justify-content: center;
 }
 
 .create a{

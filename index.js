@@ -14,3 +14,21 @@ setTimeout(function(){
     }
 }, 3000)
 
+let Slidein = document.querySelector(".slidein");
+let Slideout = document.querySelector(".slideout");
+const negativeTransform = "-100%";
+const positiveTransform = "100%";
+const defaultTransform = "0%";
+Slidein.addEventListener('click', ()=>{
+    let loginPage = document.querySelector(".login1");
+    let signupPage = document.querySelector(".login2");
+        loginPage.style.transform = `translate(${negativeTransform})`;
+        signupPage.style.transform = `translate(${negativeTransform})`;
+})
+
+Slideout.addEventListener('click', ()=>{
+    let loginPage = document.querySelector(".login1");
+    let signupPage = document.querySelector(".login2");
+    loginPage.style.transform = `translate(${defaultTransform})`;
+    signupPage.style.transform = `translate(${defaultTransform})`;
+})
