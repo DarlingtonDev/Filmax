@@ -78,20 +78,43 @@ window.onload = function(){
         let allTrending = [];
         let allTrendingTrack = 0;
         let mostTrendingImage = [];
+        let cast = [];
         for (let i  = 0; i < response.length; i++){
             for (let j = 0; j < response[i].length; j++){       // This loop is creating an array of all trending movies
+                if (response[i][j].media_type == 'tv'){
+                    continue;
+                }
                 allTrending[allTrendingTrack] = response[i][j];
                 allTrendingTrack++;
             }
         }
-        console.log(allTrending);
+        for (let i = 0; i < allTrending.length; i++){
+                const options = {
+                    method: 'GET',
+                    headers: {
+                      accept: 'application/json',
+                      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyODZkM2Q1ZGRjYjMwNGU2Mzg4M2ExMGQ5YTY5MmU1YiIsInN1YiI6IjY1MDc0NWNiOGE4OGIyMDEzY2ZhMWVmMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.1LSdKndXpyOiBONS6vWxijlUrUINE5mntqfSp-_cxn8'
+                    }
+                  };
+                  
+                      fetch(`https://api.themoviedb.org/3/movie/${allTrending[i].id}/credits?language=en-US`, options)
+                      .then(response => response.json())
+                      .then(data => {
+                        for (let j = 0; j < 5; j++){
+                            cast[i] = data.cast;
+                        }
+                        })
+                      .catch(err => console.log(err));
+        }
+         console.log(cast);
+        //console.log(allTrending)
+        
         for(let i = 0; i < allTrending.length; i++){
             if (allTrending[i].popularity > mostTrendingNum){  //This part of the code loops through the trending movies
                 mostTrendingNum = allTrending[i].popularity;   // array and stores the highest trending movie in the
             }                                                  // variable mostTrendingNum
         }
-        console.log(mostTrendingNum);
-
+       
         for (let i = 0; i < allTrending.length; i++){
             if (allTrending[i].popularity == mostTrendingNum){  // This part retrieves the object that is initiated to 
                 mostTrendingImage = allTrending[i];             // the most trending movie
@@ -99,7 +122,7 @@ window.onload = function(){
                 continue;
             }
         }
-        console.log(mostTrendingImage);
+       
         const imagePath = mostTrendingImage.poster_path;
         const overview = mostTrendingImage.overview;
         let firstParagraph = document.querySelector(".firstParagraph");
@@ -118,12 +141,37 @@ window.onload = function(){
         }
         let div = document.createElement("div");
         div.addEventListener('click', () =>{
+            /* Movie details part */
+            let prologDiv = document.createElement("div");
+            let prologHead = document.createElement("h3");
+            let prologBody = document.createElement("p");
+            prologDiv.classList.add("prologDiv");
+            prologHead.innerText = "movie overview";
+            prologBody.innerText = allTrending[i].overview;
+            prologDiv.append(prologHead);
+            prologDiv.append(prologBody);
+            let buttonDiv = document.createElement("div");
+            buttonDiv.classList.add("btndiv");
+            let btn = document.createElement("button");
+            btn.innerText = "Play now";
+            buttonDiv.append(btn);
+            let iconOne = document.createElement("li");
+            let iconTwo = document.createElement("li");
+            let iconDivs = document.createElement("div")
+            iconDivs.classList.add("icondivs");
+            iconDivs.append(iconOne);
+            iconDivs.append(iconTwo);
+            iconOne.classList.add("fa-solid");
+            iconOne.classList.add("fa-plus");
+            iconTwo.classList.add("fa-solid");
+            iconTwo.classList.add("fa-download");
             let movieTitle = allTrending[i].title;
             let titleDiv = document.createElement("div");
             titleDiv.classList.add("titlediv");
             let titleP = document.createElement("h4");
             titleP.innerText = movieTitle;
             titleDiv.append(titleP);
+            titleDiv.append(iconDivs);
             let footer = document.querySelector(".footerImg");
             let realFooter = document.querySelector("footer");
             let checkIfChildIsPresent = realFooter.children[1].childElementCount
@@ -137,13 +185,17 @@ window.onload = function(){
             trendingImageSec.src = `https://image.tmdb.org/t/p/w500${trendingbackdrop}`;
             footer.append(trendingImageSec);
             footer.append(titleDiv);
+            footer.append(buttonDiv);
+            footer.append(prologDiv);
             }else if (checkIfChildIsPresent >= 1){
             let p = document.createElement("p");
             p.innerText = "preview";
             trendingImageSec.src = `https://image.tmdb.org/t/p/w500${trendingbackdrop}`;
             footer.replaceChild(trendingImageSec, realFooter.children[1].childNodes[1]);
             footer.replaceChild(titleDiv, footer.children[1]);
-            console.log(allTrending[i])
+            footer.replaceChild(buttonDiv, footer.children[2]);
+            footer.replaceChild(prologDiv, footer.children[3]);
+            //console.log(footer.children[3])
             }
             
             realFooter.style.height = "100vh";
@@ -178,7 +230,7 @@ window.onload = function(){
         page++;
         }
         handleFirstResponse(trendingMovies);
-        console.log(trendingMovies);
+        //console.log(trendingMovies);
     }catch (error){
     console.error(error);
     }
@@ -255,7 +307,7 @@ window.onload = function(){
                             }else if (checkIfChildIsPresent >= 1){
                                 footer.replaceChild(backdropImg, actualFooter.children[1].childNodes[1]);
                                footer.replaceChild(titleDiv, footer.children[1]);
-                                console.log(footer.children);
+                                //console.log(footer.children);
                             }
                             let windowHeight = window.innerHeight
                             actualFooter.style.height = `${windowHeight}px`;
@@ -378,7 +430,7 @@ window.onload = function(){
                     
                 }
             }
-            console.log(moviesAddedId);
+            //console.log(moviesAddedId);
         }catch (error){
                 console.log(error);
               }
