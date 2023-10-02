@@ -78,7 +78,6 @@ window.onload = function(){
         let allTrending = [];
         let allTrendingTrack = 0;
         let mostTrendingImage = [];
-        let cast = [];
         for (let i  = 0; i < response.length; i++){
             for (let j = 0; j < response[i].length; j++){       // This loop is creating an array of all trending movies
                 if (response[i][j].media_type == 'tv'){
@@ -88,26 +87,11 @@ window.onload = function(){
                 allTrendingTrack++;
             }
         }
-        for (let i = 0; i < allTrending.length; i++){
-                const options = {
-                    method: 'GET',
-                    headers: {
-                      accept: 'application/json',
-                      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyODZkM2Q1ZGRjYjMwNGU2Mzg4M2ExMGQ5YTY5MmU1YiIsInN1YiI6IjY1MDc0NWNiOGE4OGIyMDEzY2ZhMWVmMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.1LSdKndXpyOiBONS6vWxijlUrUINE5mntqfSp-_cxn8'
-                    }
-                  };
-                  
-                      fetch(`https://api.themoviedb.org/3/movie/${allTrending[i].id}/credits?language=en-US`, options)
-                      .then(response => response.json())
-                      .then(data => {
-                        for (let j = 0; j < 5; j++){
-                            cast[i] = data.cast;
-                        }
-                        })
-                      .catch(err => console.log(err));
-        }
-         console.log(cast);
-        //console.log(allTrending)
+        
+    
+                     
+         
+       
         
         for(let i = 0; i < allTrending.length; i++){
             if (allTrending[i].popularity > mostTrendingNum){  //This part of the code loops through the trending movies
@@ -141,6 +125,54 @@ window.onload = function(){
         }
         let div = document.createElement("div");
         div.addEventListener('click', () =>{
+            let castDiv = document.createElement("div");
+            castDiv.classList.add("castdiv");
+            let castHeader = document.createElement("h3");
+            castHeader.innerText = "top casts";
+            let castImageContainer = document.createElement("div");
+            castImageContainer.classList.add("castimagecont");
+            
+            castDiv.appendChild(castHeader);
+           const options = {
+                method: 'GET',
+                headers: {
+                  accept: 'application/json',
+                  Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyODZkM2Q1ZGRjYjMwNGU2Mzg4M2ExMGQ5YTY5MmU1YiIsInN1YiI6IjY1MDc0NWNiOGE4OGIyMDEzY2ZhMWVmMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.1LSdKndXpyOiBONS6vWxijlUrUINE5mntqfSp-_cxn8'
+                }
+                
+              };
+              
+                  fetch(`https://api.themoviedb.org/3/movie/${allTrending[i].id}/credits?language=en-US`, options)
+                  .then(response => response.json())
+                  .then(data => {
+                    for (let i = 0; i < 7; i++){
+                        if (data.cast[i] == undefined || data.cast[i] == null){
+                            continue;
+                        }
+                        let actorImage = data.cast[i].profile_path;
+                        let actorRealName = data.cast[i].name;
+                        let ActualnameParagraph = document.createElement("p");
+                        ActualnameParagraph.innerText = actorRealName;
+                        let charactername = data.cast[i].character;
+                        let characterSmall = document.createElement("small");
+                        characterSmall.innerText = charactername;
+                        let castActualImage = document.createElement("div");
+                        castActualImage.classList.add("castactualimg");
+                        let imageTagActor = document.createElement("img");
+                        imageTagActor.src = `https://image.tmdb.org/t/p/w500${actorImage}`;
+                        if (actorImage == null){
+                            continue;
+                        }
+                        castActualImage.append(imageTagActor);
+                        castActualImage.append(ActualnameParagraph);
+                        castActualImage.append(characterSmall);
+                        castImageContainer.append(castActualImage);
+                        
+                       
+                    }
+                  })
+                  .catch(err => console.log(err));
+           
             /* Movie details part */
             let prologDiv = document.createElement("div");
             let prologHead = document.createElement("h3");
@@ -178,6 +210,7 @@ window.onload = function(){
             let trendingbackdrop = allTrending[i].backdrop_path;
             let trendingImageSec = document.createElement("img");
             let trendingPreviewText = document.querySelector(".paragraphText");
+            castDiv.append(castImageContainer);
             if (checkIfChildIsPresent <= 0){
             let p = document.createElement("p");
             p.innerText = "preview";
@@ -187,6 +220,7 @@ window.onload = function(){
             footer.append(titleDiv);
             footer.append(buttonDiv);
             footer.append(prologDiv);
+            footer.appendChild(castDiv);
             }else if (checkIfChildIsPresent >= 1){
             let p = document.createElement("p");
             p.innerText = "preview";
@@ -195,10 +229,11 @@ window.onload = function(){
             footer.replaceChild(titleDiv, footer.children[1]);
             footer.replaceChild(buttonDiv, footer.children[2]);
             footer.replaceChild(prologDiv, footer.children[3]);
-            //console.log(footer.children[3])
+            footer.replaceChild(castDiv, footer.children[4])
+            //console.log(footer.children[4])
             }
             
-            realFooter.style.height = "100vh";
+            realFooter.style.height = "100%";
         })
         div.classList.add("trending-box");
         let image = document.createElement("img");
