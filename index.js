@@ -321,6 +321,78 @@ window.onload = function(){
                         let div = document.createElement("div");
                         div.classList.add("trending-box");
                         div.addEventListener('click', () =>{
+                            let castDiv = document.createElement("div");
+                            castDiv.classList.add("castdiv");
+                            let castHeader = document.createElement("h3");
+                            castHeader.innerText = "top casts";
+                            let castImageContainer = document.createElement("div");
+                            castImageContainer.classList.add("castimagecont");
+                            
+                            castDiv.appendChild(castHeader);
+
+                            const options = {
+                                method: 'GET',
+                                headers: {
+                                  accept: 'application/json',
+                                  Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyODZkM2Q1ZGRjYjMwNGU2Mzg4M2ExMGQ5YTY5MmU1YiIsInN1YiI6IjY1MDc0NWNiOGE4OGIyMDEzY2ZhMWVmMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.1LSdKndXpyOiBONS6vWxijlUrUINE5mntqfSp-_cxn8'
+                                }
+                                
+                              };
+                              
+                                  fetch(`https://api.themoviedb.org/3/movie/${newArray[a][b].id}/credits?language=en-US`, options)
+                                  .then(response => response.json())
+                                  .then(data =>{
+                                    for (let i = 0; i < 7; i++){
+                                        if (data.cast[i] == undefined || data.cast[i] == null){
+                                            continue;
+                                        }
+                                        let actorImage = data.cast[i].profile_path;
+                                        let actorRealName = data.cast[i].name;
+                                        let ActualnameParagraph = document.createElement("p");
+                                        ActualnameParagraph.innerText = actorRealName;
+                                        let charactername = data.cast[i].character;
+                                        let characterSmall = document.createElement("small");
+                                        characterSmall.innerText = charactername;
+                                        let castActualImage = document.createElement("div");
+                                        castActualImage.classList.add("castactualimg");
+                                        let imageTagActor = document.createElement("img");
+                                        imageTagActor.src = `https://image.tmdb.org/t/p/w500${actorImage}`;
+                                        if (actorImage == null){
+                                            continue;
+                                        }
+                                        castActualImage.append(imageTagActor);
+                                        castActualImage.append(ActualnameParagraph);
+                                        castActualImage.append(characterSmall);
+                                        castImageContainer.append(castActualImage);
+                                        
+                                       
+                                    }
+                                  })
+                                  .catch(err => console.log(err));
+
+                                let prologDiv = document.createElement("div");
+                                let prologHead = document.createElement("h3");
+                                let prologBody = document.createElement("p");
+                                prologDiv.classList.add("prologDiv");
+                                prologHead.innerText = "movie overview";
+                                prologBody.innerText = newArray[a][b].overview;
+                                prologDiv.append(prologHead);
+                                prologDiv.append(prologBody);
+                                let buttonDiv = document.createElement("div");
+            buttonDiv.classList.add("btndiv");
+            let btn = document.createElement("button");
+            btn.innerText = "Play now";
+            buttonDiv.append(btn);
+            let iconOne = document.createElement("li");
+            let iconTwo = document.createElement("li");
+            let iconDivs = document.createElement("div")
+            iconDivs.classList.add("icondivs");
+            iconDivs.append(iconOne);
+            iconDivs.append(iconTwo);
+            iconOne.classList.add("fa-solid");
+            iconOne.classList.add("fa-plus");
+            iconTwo.classList.add("fa-solid");
+            iconTwo.classList.add("fa-download");
                             let trendingPreviewText = document.querySelector(".paragraphText");
                             let divPoster = newArray[a][b].backdrop_path;
                             let movieTitle = newArray[a][b].title;
@@ -329,19 +401,27 @@ window.onload = function(){
                             let titleP = document.createElement("h4");
                             titleP.innerText = movieTitle;
                             titleDiv.append(titleP);
+                            titleDiv.append(iconDivs);
                             let backdropImg = document.createElement("img");
                             backdropImg.src = `https://image.tmdb.org/t/p/w500${divPoster}`;
                             let checkIfChildIsPresent = actualFooter.children[1].childElementCount;
+                            castDiv.append(castImageContainer);
                             if (checkIfChildIsPresent <= 0){
                             footer.append(backdropImg);
                             footer.append(titleDiv);
                             console.log(movieTitle);
+                            footer.append(buttonDiv);
+                            footer.append(prologDiv);
+                            footer.appendChild(castDiv);
                             let p = document.createElement("p");
                             p.innerText = "preview";
                             trendingPreviewText.append(p); 
                             }else if (checkIfChildIsPresent >= 1){
                                 footer.replaceChild(backdropImg, actualFooter.children[1].childNodes[1]);
-                               footer.replaceChild(titleDiv, footer.children[1]);
+                                footer.replaceChild(titleDiv, footer.children[1]);
+                                footer.replaceChild(buttonDiv, footer.children[2]);
+                                footer.replaceChild(prologDiv, footer.children[3]);
+                                footer.replaceChild(castDiv, footer.children[4])
                                 //console.log(footer.children);
                             }
                             let windowHeight = window.innerHeight
@@ -360,6 +440,80 @@ window.onload = function(){
                         let div = document.createElement("div");
                         div.classList.add("trending-box");
                         div.addEventListener('click', () =>{
+                            let castDiv = document.createElement("div");
+                            castDiv.classList.add("castdiv");
+                            let castHeader = document.createElement("h3");
+                            castHeader.innerText = "top casts";
+                            let castImageContainer = document.createElement("div");
+                            castImageContainer.classList.add("castimagecont");
+                            
+                            castDiv.appendChild(castHeader);
+
+                            const options = {
+                                method: 'GET',
+                                headers: {
+                                  accept: 'application/json',
+                                  Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyODZkM2Q1ZGRjYjMwNGU2Mzg4M2ExMGQ5YTY5MmU1YiIsInN1YiI6IjY1MDc0NWNiOGE4OGIyMDEzY2ZhMWVmMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.1LSdKndXpyOiBONS6vWxijlUrUINE5mntqfSp-_cxn8'
+                                }
+                                
+                              };
+                              
+                                  fetch(`https://api.themoviedb.org/3/movie/${newArray[a][b].id}/credits?language=en-US`, options)
+                                  .then(response => response.json())
+                                  .then(data =>{
+                                    for (let i = 0; i < 7; i++){
+                                        if (data.cast[i] == undefined || data.cast[i] == null){
+                                            continue;
+                                        }
+                                        let actorImage = data.cast[i].profile_path;
+                                        let actorRealName = data.cast[i].name;
+                                        let ActualnameParagraph = document.createElement("p");
+                                        ActualnameParagraph.innerText = actorRealName;
+                                        let charactername = data.cast[i].character;
+                                        let characterSmall = document.createElement("small");
+                                        characterSmall.innerText = charactername;
+                                        let castActualImage = document.createElement("div");
+                                        castActualImage.classList.add("castactualimg");
+                                        let imageTagActor = document.createElement("img");
+                                        imageTagActor.src = `https://image.tmdb.org/t/p/w500${actorImage}`;
+                                        if (actorImage == null){
+                                            continue;
+                                        }
+                                        castActualImage.append(imageTagActor);
+                                        castActualImage.append(ActualnameParagraph);
+                                        castActualImage.append(characterSmall);
+                                        castImageContainer.append(castActualImage);
+                                        
+                                       
+                                    }
+                                  })
+                                  .catch(err => console.log(err));
+
+                                  let prologDiv = document.createElement("div");
+                                let prologHead = document.createElement("h3");
+                                let prologBody = document.createElement("p");
+                                prologDiv.classList.add("prologDiv");
+                                prologHead.innerText = "movie overview";
+                                prologBody.innerText = newArray[a][b].overview;
+                                prologDiv.append(prologHead);
+                                prologDiv.append(prologBody);
+                                let buttonDiv = document.createElement("div");
+            buttonDiv.classList.add("btndiv");
+            let btn = document.createElement("button");
+            btn.innerText = "Play now";
+            buttonDiv.append(btn);
+            let iconOne = document.createElement("li");
+            let iconTwo = document.createElement("li");
+            let iconDivs = document.createElement("div")
+            iconDivs.classList.add("icondivs");
+            iconDivs.append(iconOne);
+            iconDivs.append(iconTwo);
+            iconOne.classList.add("fa-solid");
+            iconOne.classList.add("fa-plus");
+            iconTwo.classList.add("fa-solid");
+            iconTwo.classList.add("fa-download");
+
+
                             let movieTitle = newArray[a][b].title;
                             let titleDiv = document.createElement("div");
                             titleDiv.classList.add("titlediv");
@@ -371,17 +525,23 @@ window.onload = function(){
                         let kidsImage = document.createElement("img");
                         kidsImage.src = `https://image.tmdb.org/t/p/w500${kidsImagePosterPath}`;
                         let checkIfChildIsPresent = actualFooter.children[1].childElementCount
+                        castDiv.append(castImageContainer);
                         if(checkIfChildIsPresent <= 0){
-                            footer.append(backdropImg);
+                            footer.append(kidsImage);
                             footer.append(titleDiv);
                             console.log(movieTitle);
-                        footer.append(kidsImage);
+                        footer.append(buttonDiv);
+                        footer.append(prologDiv);
+                        footer.appendChild(castDiv);
                         let p = document.createElement("p");
                         p.innerText = "preview";
                         trendingPreviewText.append(p); 
                         }else if (checkIfChildIsPresent >= 1){
                             footer.replaceChild(kidsImage, actualFooter.children[1].childNodes[1]);
                             footer.replaceChild(titleDiv, footer.children[1]);
+                            footer.replaceChild(buttonDiv, footer.children[2]);
+                            footer.replaceChild(prologDiv, footer.children[3]);
+                            footer.replaceChild(castDiv, footer.children[4])
                         }
                         actualFooter.style.height = "100%";
                         })
@@ -398,6 +558,79 @@ window.onload = function(){
                         let div = document.createElement("div");
                         div.classList.add("trending-box");
                         div.addEventListener('click', () =>{
+                            let castDiv = document.createElement("div");
+                            castDiv.classList.add("castdiv");
+                            let castHeader = document.createElement("h3");
+                            castHeader.innerText = "top casts";
+                            let castImageContainer = document.createElement("div");
+                            castImageContainer.classList.add("castimagecont");
+                            
+                            castDiv.appendChild(castHeader);
+
+                            const options = {
+                                method: 'GET',
+                                headers: {
+                                  accept: 'application/json',
+                                  Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyODZkM2Q1ZGRjYjMwNGU2Mzg4M2ExMGQ5YTY5MmU1YiIsInN1YiI6IjY1MDc0NWNiOGE4OGIyMDEzY2ZhMWVmMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.1LSdKndXpyOiBONS6vWxijlUrUINE5mntqfSp-_cxn8'
+                                }
+                                
+                              };
+                              
+                                  fetch(`https://api.themoviedb.org/3/movie/${newArray[a][b].id}/credits?language=en-US`, options)
+                                  .then(response => response.json())
+                                  .then(data =>{
+                                    for (let i = 0; i < 7; i++){
+                                        if (data.cast[i] == undefined || data.cast[i] == null){
+                                            continue;
+                                        }
+                                        let actorImage = data.cast[i].profile_path;
+                                        let actorRealName = data.cast[i].name;
+                                        let ActualnameParagraph = document.createElement("p");
+                                        ActualnameParagraph.innerText = actorRealName;
+                                        let charactername = data.cast[i].character;
+                                        let characterSmall = document.createElement("small");
+                                        characterSmall.innerText = charactername;
+                                        let castActualImage = document.createElement("div");
+                                        castActualImage.classList.add("castactualimg");
+                                        let imageTagActor = document.createElement("img");
+                                        imageTagActor.src = `https://image.tmdb.org/t/p/w500${actorImage}`;
+                                        if (actorImage == null){
+                                            continue;
+                                        }
+                                        castActualImage.append(imageTagActor);
+                                        castActualImage.append(ActualnameParagraph);
+                                        castActualImage.append(characterSmall);
+                                        castImageContainer.append(castActualImage);
+                                        
+                                       
+                                    }
+                                  })
+                                  .catch(err => console.log(err));
+
+                                  let prologDiv = document.createElement("div");
+                                let prologHead = document.createElement("h3");
+                                let prologBody = document.createElement("p");
+                                prologDiv.classList.add("prologDiv");
+                                prologHead.innerText = "movie overview";
+                                prologBody.innerText = newArray[a][b].overview;
+                                prologDiv.append(prologHead);
+                                prologDiv.append(prologBody);
+                                let buttonDiv = document.createElement("div");
+            buttonDiv.classList.add("btndiv");
+            let btn = document.createElement("button");
+            btn.innerText = "Play now";
+            buttonDiv.append(btn);
+            let iconOne = document.createElement("li");
+            let iconTwo = document.createElement("li");
+            let iconDivs = document.createElement("div")
+            iconDivs.classList.add("icondivs");
+            iconDivs.append(iconOne);
+            iconDivs.append(iconTwo);
+            iconOne.classList.add("fa-solid");
+            iconOne.classList.add("fa-plus");
+            iconTwo.classList.add("fa-solid");
+            iconTwo.classList.add("fa-download");
+
                             let movieTitle = newArray[a][b].title;
                             let titleDiv = document.createElement("div");
                             titleDiv.classList.add("titlediv");
@@ -408,16 +641,23 @@ window.onload = function(){
                         let adventureImagePosterPath = newArray[a][b].backdrop_path;
                         let adventureImage = document.createElement("img");
                         adventureImage.src = `https://image.tmdb.org/t/p/w500${adventureImagePosterPath}`;
-                        let checkIfChildIsPresent = actualFooter.children[1].childElementCount
+                        let checkIfChildIsPresent = actualFooter.children[1].childElementCount;
+                        castDiv.append(castImageContainer);
                         if(checkIfChildIsPresent <= 0){
                         footer.append(adventureImage);
                         footer.append(titleDiv);
+                        footer.append(buttonDiv);
+                        footer.append(prologDiv);
+                        footer.appendChild(castDiv);
                         let p = document.createElement("p");
                         p.innerText = "preview";
                         trendingPreviewText.append(p);
                         }else if (checkIfChildIsPresent >= 1){
                             footer.replaceChild(adventureImage, actualFooter.children[1].childNodes[1]);
                             footer.replaceChild(titleDiv, footer.children[1]);
+                            footer.replaceChild(buttonDiv, footer.children[2]);
+                            footer.replaceChild(prologDiv, footer.children[3]);
+                            footer.replaceChild(castDiv, footer.children[4])
                         }
                         actualFooter.style.height = "100%";
                         })
@@ -433,6 +673,79 @@ window.onload = function(){
                         i++;
                         let div = document.createElement("div");
                         div.addEventListener('click', () =>{
+                            let castDiv = document.createElement("div");
+                            castDiv.classList.add("castdiv");
+                            let castHeader = document.createElement("h3");
+                            castHeader.innerText = "top casts";
+                            let castImageContainer = document.createElement("div");
+                            castImageContainer.classList.add("castimagecont");
+                            
+                            castDiv.appendChild(castHeader);
+
+                            const options = {
+                                method: 'GET',
+                                headers: {
+                                  accept: 'application/json',
+                                  Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyODZkM2Q1ZGRjYjMwNGU2Mzg4M2ExMGQ5YTY5MmU1YiIsInN1YiI6IjY1MDc0NWNiOGE4OGIyMDEzY2ZhMWVmMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.1LSdKndXpyOiBONS6vWxijlUrUINE5mntqfSp-_cxn8'
+                                }
+                                
+                              };
+                              
+                                  fetch(`https://api.themoviedb.org/3/movie/${newArray[a][b].id}/credits?language=en-US`, options)
+                                  .then(response => response.json())
+                                  .then(data =>{
+                                    for (let i = 0; i < 7; i++){
+                                        if (data.cast[i] == undefined || data.cast[i] == null){
+                                            continue;
+                                        }
+                                        let actorImage = data.cast[i].profile_path;
+                                        let actorRealName = data.cast[i].name;
+                                        let ActualnameParagraph = document.createElement("p");
+                                        ActualnameParagraph.innerText = actorRealName;
+                                        let charactername = data.cast[i].character;
+                                        let characterSmall = document.createElement("small");
+                                        characterSmall.innerText = charactername;
+                                        let castActualImage = document.createElement("div");
+                                        castActualImage.classList.add("castactualimg");
+                                        let imageTagActor = document.createElement("img");
+                                        imageTagActor.src = `https://image.tmdb.org/t/p/w500${actorImage}`;
+                                        if (actorImage == null){
+                                            continue;
+                                        }
+                                        castActualImage.append(imageTagActor);
+                                        castActualImage.append(ActualnameParagraph);
+                                        castActualImage.append(characterSmall);
+                                        castImageContainer.append(castActualImage);
+                                        
+                                       
+                                    }
+                                  })
+                                  .catch(err => console.log(err));
+
+                                  let prologDiv = document.createElement("div");
+                                let prologHead = document.createElement("h3");
+                                let prologBody = document.createElement("p");
+                                prologDiv.classList.add("prologDiv");
+                                prologHead.innerText = "movie overview";
+                                prologBody.innerText = newArray[a][b].overview;
+                                prologDiv.append(prologHead);
+                                prologDiv.append(prologBody);
+                                let buttonDiv = document.createElement("div");
+            buttonDiv.classList.add("btndiv");
+            let btn = document.createElement("button");
+            btn.innerText = "Play now";
+            buttonDiv.append(btn);
+            let iconOne = document.createElement("li");
+            let iconTwo = document.createElement("li");
+            let iconDivs = document.createElement("div")
+            iconDivs.classList.add("icondivs");
+            iconDivs.append(iconOne);
+            iconDivs.append(iconTwo);
+            iconOne.classList.add("fa-solid");
+            iconOne.classList.add("fa-plus");
+            iconTwo.classList.add("fa-solid");
+            iconTwo.classList.add("fa-download");
+
                             let movieTitle = newArray[a][b].title;
                             let titleDiv = document.createElement("div");
                             titleDiv.classList.add("titlediv");
@@ -444,15 +757,22 @@ window.onload = function(){
                         let crimeImage = document.createElement("img");
                         crimeImage.src = `https://image.tmdb.org/t/p/w500${crimeImagePosterPath}`;
                         let checkIfChildIsPresent = actualFooter.children[1].childElementCount
+                        castDiv.append(castImageContainer);
                         if(checkIfChildIsPresent <= 0){
                         footer.append(crimeImage);
                         footer.append(titleDiv);
+                        footer.append(buttonDiv);
+                        footer.append(prologDiv);
+                        footer.appendChild(castDiv);
                         let p = document.createElement("p");
                         p.innerText = "preview";
                         trendingPreviewText.append(p); 
                         }else if (checkIfChildIsPresent >= 1){
                             footer.replaceChild(crimeImage, actualFooter.children[1].childNodes[1]);
                             footer.replaceChild(titleDiv, footer.children[1]);
+                            footer.replaceChild(buttonDiv, footer.children[2]);
+                            footer.replaceChild(prologDiv, footer.children[3]);
+                            footer.replaceChild(castDiv, footer.children[4])
                         }
                         actualFooter.style.height = "100%";
                         })
@@ -471,6 +791,7 @@ window.onload = function(){
               }
     }
     fetchAll();
+
         let arrowLeft = document.querySelector(".backiconOne");
         arrowLeft.addEventListener('click', () =>{
         let originalFooter = document.querySelector("footer");
@@ -478,4 +799,5 @@ window.onload = function(){
         //originalFooter.removeChild()
         originalFooter.style.height = "0";
         })
+
 }

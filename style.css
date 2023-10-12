@@ -354,17 +354,22 @@ font-size: 14px;
   left: 20px;
 }
 
+.user img{
+  border-radius: 50%;
+}
+
 .search{
   width: 2.5em;
   height: 2.5em;
-  border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 50%;
   background-color: rgba(117, 117, 117, 0.4);
   position: absolute;
   top: 20px;
   right: 20px;
+  color: rgb(117, 117, 117);
 }
 
 .preview{
