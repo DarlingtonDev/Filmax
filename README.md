@@ -1,3 +1,1 @@
-# Filmax
-This is a movie streaming application template. responsive and light weight.
-Tech stacks: HTML, CSS AND JAVASCRIPT
+Lmao, i thought i was building the next "Netflix", i come here to make a fun of myself
